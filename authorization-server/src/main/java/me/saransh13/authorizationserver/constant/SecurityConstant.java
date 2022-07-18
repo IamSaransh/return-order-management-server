@@ -12,5 +12,6 @@ public class SecurityConstant {
     public static final String TOKEN_CANNOT_BE_VERIFIED = "Token Cannot Be Verified";
     public static final String ME_SARANSH13 = "Saransh13.me";
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
-    public static final String[] PUBLIC_URLS = {"/login", "/authenticate", "/signup"};
+//    public static final String[] PUBLIC_URLS = {"/login", "/authenticate", "/signup"};
+    public static final String[] PUBLIC_URLS = {"**"};
 }

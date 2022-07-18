@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -19,8 +20,9 @@ import static me.saransh13.authorizationserver.constant.SecurityConstant.*;
 /**
  * @author saransh
  */
+@Component
 public class JwtAuthorizationFilter  extends OncePerRequestFilter {
-    private JWTTokenProvider jwtTokenProvider;
+    private final JWTTokenProvider jwtTokenProvider;
 
     public JwtAuthorizationFilter(JWTTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
@@ -33,7 +35,7 @@ public class JwtAuthorizationFilter  extends OncePerRequestFilter {
         }
         else{
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if(authorizationHeader == null || authorizationHeader.startsWith(SecurityConstant.TOKEN_HEADER_PREFIX)){
+            if(authorizationHeader == null || !authorizationHeader.startsWith(SecurityConstant.TOKEN_HEADER_PREFIX)){
                 filterChain.doFilter(request, response);
                 return;
             }
