@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author saransh
@@ -25,13 +26,16 @@ import javax.transaction.Transactional;
 @Transactional
 @Qualifier("userDetailsService")
 public class CustomerService implements UserDetailsService {
-    private BCryptPasswordEncoder passwordEncoder;
-    private CustomerRepository repository;
+
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final CustomerRepository repository;
+    private final LoginAttemptService loginAttemptService;
 
     @Autowired
-    public CustomerService(CustomerRepository repository, BCryptPasswordEncoder passwordEncoder) {
-        this.repository = repository;
+    public CustomerService(BCryptPasswordEncoder passwordEncoder, CustomerRepository repository, LoginAttemptService loginAttemptService) {
         this.passwordEncoder = passwordEncoder;
+        this.repository = repository;
+        this.loginAttemptService = loginAttemptService;
     }
 
     @Override
@@ -42,10 +46,24 @@ public class CustomerService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found by username" +  username);
         }
         else{
+            try {
+                validateLoginAttempt(customer);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
             UserPrincipal userPrincipal = new UserPrincipal(customer);
             log.info("Returning found user by username {}" , username);
             log.info("The returned user has password as : {}", userPrincipal.getPassword());
             return userPrincipal;
+        }
+    }
+
+    private void validateLoginAttempt(Customer customer) throws ExecutionException {
+        if(customer.isEnabled()){
+            customer.setEnabled(!loginAttemptService.hasExceededMaxAttempts(customer.getEmail()));
+        }
+        else{
+            loginAttemptService.evictUserFromLoginAttemptCache(customer.getEmail());
         }
     }
 
