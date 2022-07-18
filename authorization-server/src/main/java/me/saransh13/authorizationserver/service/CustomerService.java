@@ -3,13 +3,17 @@ package me.saransh13.authorizationserver.service;
 import lombok.extern.slf4j.Slf4j;
 import me.saransh13.authorizationserver.domain.Customer;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
+import me.saransh13.authorizationserver.exception.EmailExistException;
 import me.saransh13.authorizationserver.repository.CustomerRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 
@@ -21,12 +25,13 @@ import javax.transaction.Transactional;
 @Transactional
 @Qualifier("userDetailsService")
 public class CustomerService implements UserDetailsService {
-
-    CustomerRepository repository;
+    private BCryptPasswordEncoder passwordEncoder;
+    private CustomerRepository repository;
 
     @Autowired
-    public CustomerService(CustomerRepository repository) {
+    public CustomerService(CustomerRepository repository, BCryptPasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,6 +46,44 @@ public class CustomerService implements UserDetailsService {
             log.info("Returning found user by username {}" , username);
             return userPrincipal;
         }
+    }
 
+    public Customer register( String email, String firstname, String lastname, String contactNumber, String password) throws EmailExistException {
+        validateEmailForRegistration(email);
+        //TODO: here you need to generate user id if we decide to add it in the future and validate same in validate method above
+        Customer customer = repository.save(
+                Customer.builder().
+                        firstName(firstname)
+                        .lastName(lastname)
+                        .password(encodePassword(password))
+                        .email(email)
+                        .contactNumber(contactNumber)
+                        .pfpUrl(generateRandomPfpUrl())
+                        .isEnabled(true)
+                        .build()
+        );
+        log.info("Customer " + customer + " saved");
+        return customer;
+    }
+
+    private String generateRandomPfpUrl() {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/customer/image/profile/temp").toUriString();
+    }
+
+    private String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    private void validateEmailForRegistration(String email) throws EmailExistException {
+        if(StringUtils.isNoneBlank(email)){
+            Customer customer = getCustomerByEmail(email);
+            if(customer!=null){
+                throw new EmailExistException("User with email " + email + " already exists!");
+            }
+        }
+    }
+
+    public Customer getCustomerByEmail(String email){
+        return repository.findCustomerByEmail(email);
     }
 }

@@ -62,6 +62,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        //added to show H2-console
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
     @Bean
     @Override
