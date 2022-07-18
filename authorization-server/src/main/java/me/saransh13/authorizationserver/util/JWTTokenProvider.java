@@ -1,4 +1,4 @@
-package me.saransh13.authorizationserver.service;
+package me.saransh13.authorizationserver.util;
 
 
 import com.auth0.jwt.JWT;

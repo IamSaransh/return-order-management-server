@@ -35,7 +35,6 @@ public class ExceptionHandling implements ErrorController {
     private static final String ACCOUNT_DISABLED = "Your account has been disabled. If this is an error, please contact administration";
     private static final String ERROR_PROCESSING_FILE = "Error occurred while processing file";
     private static final String NOT_ENOUGH_PERMISSION = "You do not have enough permission";
-    public static final String ERROR_PATH = "/error";
 
     @ExceptionHandler(DisabledException.class)
     public ResponseEntity<HttpResponse>  accountDisabledException(){
@@ -114,7 +113,7 @@ public class ExceptionHandling implements ErrorController {
         return new ResponseEntity<>(httpResponse, httpStatus);
     }
 
-    @RequestMapping(ERROR_PATH)
+    @RequestMapping("/error")
     public ResponseEntity<HttpResponse> notFound404() {
         log.warn("Page not found! 404");
         return createHttpResponse(NOT_FOUND, "There is no mapping for this URL");

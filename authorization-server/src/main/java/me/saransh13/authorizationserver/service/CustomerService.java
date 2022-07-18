@@ -44,6 +44,7 @@ public class CustomerService implements UserDetailsService {
         else{
             UserPrincipal userPrincipal = new UserPrincipal(customer);
             log.info("Returning found user by username {}" , username);
+            log.info("The returned user has password as : {}", userPrincipal.getPassword());
             return userPrincipal;
         }
     }

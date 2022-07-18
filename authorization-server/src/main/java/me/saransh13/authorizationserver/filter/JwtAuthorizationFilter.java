@@ -1,7 +1,7 @@
 package me.saransh13.authorizationserver.filter;
 
 import me.saransh13.authorizationserver.constant.SecurityConstant;
-import me.saransh13.authorizationserver.service.JWTTokenProvider;
+import me.saransh13.authorizationserver.util.JWTTokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
