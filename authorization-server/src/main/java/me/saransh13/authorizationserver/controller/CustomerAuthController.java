@@ -13,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static me.saransh13.authorizationserver.constant.SecurityConstant.JWT_TOKEN_HEADER;
 
@@ -24,11 +22,12 @@ import static me.saransh13.authorizationserver.constant.SecurityConstant.JWT_TOK
  * @author saransh
  */
 @RestController
+@RequestMapping("auth/v1")
 public class CustomerAuthController extends ExceptionHandling {
 
-    private CustomerService customerService;
-    private AuthenticationManager authenticationManager;
-    private JWTTokenProvider jwtTokenProvider;
+    private final CustomerService customerService;
+    private final AuthenticationManager authenticationManager;
+    private final JWTTokenProvider jwtTokenProvider;
 
     @Autowired
     public CustomerAuthController(CustomerService customerService, AuthenticationManager authenticationManager, JWTTokenProvider jwtTokenProvider) {
@@ -37,25 +36,18 @@ public class CustomerAuthController extends ExceptionHandling {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello World!";
+    }
 
     @PostMapping("/login")
-    public  ResponseEntity<Customer> login(@RequestBody Customer customer) throws EmailExistException {
+    public  ResponseEntity<Customer> login(@RequestBody Customer customer) {
         authenticate(customer.getEmail(), customer.getPassword()); // thia method will throw if not valid
         Customer loginCustomer = customerService.getCustomerByEmail(customer.getEmail());
         UserPrincipal userPrincipal = new UserPrincipal(loginCustomer);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         return new ResponseEntity<>(loginCustomer, jwtHeader, HttpStatus.OK);
-    }
-
-    private HttpHeaders getJwtHeader(UserPrincipal userPrincipal) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(JWT_TOKEN_HEADER,jwtTokenProvider.generateJwtToken(userPrincipal));
-        return headers;
-    }
-
-    private void authenticate(String email, String password) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
     }
 
     @PostMapping("/register")
@@ -66,6 +58,17 @@ public class CustomerAuthController extends ExceptionHandling {
                 customer.getContactNumber(),
                 customer.getPassword());
         return new ResponseEntity<>(registeredCustomer, HttpStatus.OK);
+    }
+
+
+    private HttpHeaders getJwtHeader(UserPrincipal userPrincipal) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(JWT_TOKEN_HEADER,jwtTokenProvider.generateJwtToken(userPrincipal));
+        return headers;
+    }
+
+    private void authenticate(String email, String password) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
     }
 
 }

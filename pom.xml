@@ -20,6 +20,8 @@
 
 	<modules>
 		<module>authorization-server</module>
+		<module>naming-server</module>
+		<module>api-gateway</module>
 	</modules>
 	<dependencies>
 
