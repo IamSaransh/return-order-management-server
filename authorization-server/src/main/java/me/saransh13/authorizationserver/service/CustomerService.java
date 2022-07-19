@@ -51,7 +51,6 @@ public class CustomerService implements UserDetailsService {
 
     public Customer register( String email, String firstname, String lastname, String contactNumber, String password) throws EmailExistException {
         validateEmailForRegistration(email);
-        //TODO: here you need to generate user id if we decide to add it in the future and validate same in validate method above
         Customer customer = repository.save(
                 Customer.builder().
                         firstName(firstname)
