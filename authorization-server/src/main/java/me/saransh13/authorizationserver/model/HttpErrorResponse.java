@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class HttpResponse {
+public class HttpErrorResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
     private Date date;
     private int status;
@@ -18,7 +18,7 @@ public class HttpResponse {
     private String reason;
     private String message;
 
-    public HttpResponse(int status, HttpStatus httpStatus, String reason, String message) {
+    public HttpErrorResponse(int status, HttpStatus httpStatus, String reason, String message) {
         this.date = new Date();
         this.status = status;
         this.httpStatus = httpStatus;

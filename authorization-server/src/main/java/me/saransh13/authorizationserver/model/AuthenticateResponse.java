@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 @Builder
-public class AuthenticateResponse2 {
+public class AuthenticateResponse {
 
     private boolean isAuthenticated;
     private HttpStatus httpStatus;

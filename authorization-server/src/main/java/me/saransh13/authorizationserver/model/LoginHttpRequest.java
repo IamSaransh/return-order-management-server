@@ -9,11 +9,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.*;
 
 @Data
 @Builder
@@ -22,6 +17,6 @@ import java.util.*;
 public class LoginHttpRequest {
     @Email(message = "Invalid email provided")
     private String email;
-    @Min(value = 6, message = "Invalid Password was sent in the request")
+    @Min(value=6)
     private String password;
 }

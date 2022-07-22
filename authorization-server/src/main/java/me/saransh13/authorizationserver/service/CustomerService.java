@@ -4,10 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import me.saransh13.authorizationserver.domain.Customer;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
 import me.saransh13.authorizationserver.exception.EmailExistException;
+import me.saransh13.authorizationserver.model.AuthenticateResponse;
 import me.saransh13.authorizationserver.repository.CustomerRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -86,4 +89,35 @@ public class CustomerService implements UserDetailsService {
     public Customer getCustomerByEmail(String email){
         return repository.findCustomerByEmail(email);
     }
+
+    public AuthenticateResponse authenticateCustomer() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.error(principal.getClass().toString());
+        log.error(principal.toString());
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+            log.info("I'm instance of userDetai;s");
+        } else {
+            username = principal.toString();
+            log.info("else block!!!!");
+        }
+
+        var customer = repository.findById(username)
+                .orElseThrow(() -> {
+                    var errorMsg = String.format("CustomerService.getCustomer () : " +
+                            "Customer not found with username %s", username);
+                    log.error(errorMsg);
+                    return new UsernameNotFoundException(errorMsg);
+                });
+
+        return AuthenticateResponse.builder()
+                .isAuthenticated(true)
+                .httpStatus(HttpStatus.OK)
+                .message("You have authenticated Successfully")
+                .email(customer.getEmail())
+                .build();
+    }
+
 }

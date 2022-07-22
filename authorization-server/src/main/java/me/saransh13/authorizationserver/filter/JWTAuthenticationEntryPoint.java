@@ -1,7 +1,7 @@
 package me.saransh13.authorizationserver.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.saransh13.authorizationserver.model.HttpResponse;
+import me.saransh13.authorizationserver.model.HttpErrorResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.stereotype.Component;
@@ -23,12 +23,12 @@ public class JWTAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        HttpResponse httpResponse = new HttpResponse(FORBIDDEN.value(), FORBIDDEN, FORBIDDEN.getReasonPhrase().toUpperCase(), FORBIDDEN_MESSAGE);
+        HttpErrorResponse httpErrorResponse = new HttpErrorResponse(FORBIDDEN.value(), FORBIDDEN, FORBIDDEN.getReasonPhrase().toUpperCase(), FORBIDDEN_MESSAGE);
         response.setContentType(APPLICATION_JSON_VALUE);
         response.setStatus(FORBIDDEN.value());
         OutputStream outputStream = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(outputStream, httpResponse);
+        mapper.writeValue(outputStream, httpErrorResponse);
         outputStream.flush();
     }
 }

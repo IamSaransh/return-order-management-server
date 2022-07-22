@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import lombok.extern.slf4j.Slf4j;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,7 @@ import static me.saransh13.authorizationserver.constant.SecurityConstant.*;
  * @author saransh
  */
 @Component
+@Slf4j
 public class JWTTokenProvider {
 
     @Value("${jwt.secret}")
@@ -30,6 +32,7 @@ public class JWTTokenProvider {
     public String generateJwtToken(UserPrincipal userPrincipal){
         return JWT.create()
                 .withIssuer(ME_SARANSH13)
+                .withSubject(userPrincipal.getUsername())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(secret.getBytes()));
@@ -55,11 +58,14 @@ public class JWTTokenProvider {
 
     public boolean isTokenValid(String username, String token){
         JWTVerifier verifier = getJwtVerifier();
-        return StringUtils.isAllEmpty(username) && !isTokenExpired(verifier, token);
+        return StringUtils.isNoneEmpty(username) && !isTokenExpired(verifier, token);
     }
     public String getSubject(String token){
         JWTVerifier verifier = getJwtVerifier();
-        return verifier.verify(token).getSubject();
+        try{return verifier.verify(token).getSubject();} catch (Exception e){
+            log.error("error verifying token!");
+            throw new JWTVerificationException("Invalid Toekn");
+        }
     }
 
     private boolean isTokenExpired(JWTVerifier verifier, String token) {
