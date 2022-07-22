@@ -15,7 +15,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HttpRequest {
+public class SignupHttpRequest {
     @Email(message = "Invalid email provided")
     private String email;
     @Min(value=6)

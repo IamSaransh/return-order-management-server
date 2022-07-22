@@ -4,6 +4,7 @@ package me.saransh13.authorizationserver.constant;
  * @author saransh
  */
 public class SecurityConstant {
+    private SecurityConstant(){}
     public static final long EXPIRATION_TIME = (long) 1.8e+6;
     public static final String TOKEN_HEADER_PREFIX  =  "Bearer ";
     public static final String JWT_TOKEN_HEADER = "Jwt-Token";
