@@ -71,7 +71,8 @@ public class CustomerAuthController extends ExceptionHandling {
 
     @PostMapping("/authenticate")
     public  ResponseEntity<AuthenticateResponse> isAuthenticated () {
-         return new ResponseEntity<>(customerService.authenticateCustomer(), HttpStatus.OK);
+//         return new ResponseEntity<>(customerService.authenticateCustomer(), HttpStatus.OK);
+         return  ResponseEntity.ok(customerService.authenticateCustomer());
     }
 
 
