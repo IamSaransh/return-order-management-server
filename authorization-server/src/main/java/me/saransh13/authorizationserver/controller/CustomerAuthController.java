@@ -1,6 +1,7 @@
 package me.saransh13.authorizationserver.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
 import me.saransh13.authorizationserver.domain.Customer;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
 import me.saransh13.authorizationserver.exception.EmailExistException;
@@ -25,8 +26,11 @@ import static me.saransh13.authorizationserver.constant.SecurityConstant.JWT_TOK
  * @author saransh
  */
 @RestController
+//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("auth/v1")
+@Slf4j
 public class CustomerAuthController extends ExceptionHandling {
+
 
     private final CustomerService customerService;
     private final AuthenticationManager authenticationManager;
@@ -46,10 +50,12 @@ public class CustomerAuthController extends ExceptionHandling {
 
     @PostMapping("/login")
     public  ResponseEntity<Customer> login(@RequestBody LoginHttpRequest loginRequest) {
-        authenticate(loginRequest.getEmail(), loginRequest.getPassword()); // this method will throw if not valid
-        Customer loginCustomer = customerService.getCustomerByEmail(loginRequest.getEmail());
+        log.info(loginRequest.getUsername());
+        authenticate(loginRequest.getUsername(), loginRequest.getPassword()); // this method will throw if not valid
+        Customer loginCustomer = customerService.getCustomerByEmail(loginRequest.getUsername());
         UserPrincipal userPrincipal = new UserPrincipal(loginCustomer);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
+        log.info(jwtHeader.toString());
         return new ResponseEntity<>(loginCustomer, jwtHeader, HttpStatus.OK);
     }
 
