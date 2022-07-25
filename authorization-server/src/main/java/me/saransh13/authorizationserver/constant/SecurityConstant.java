@@ -1,5 +1,10 @@
 package me.saransh13.authorizationserver.constant;
 
+import me.saransh13.authorizationserver.domain.Customer;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author saransh
  */
@@ -15,4 +20,13 @@ public class SecurityConstant {
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
 //    public static final String[] PUBLIC_URLS = {"/login", "/authenticate", "/signup"};
     public static final String[] PUBLIC_URLS = {"**", "/h2-console/**"};
+
+    public static void main(String[] args) {
+        Set<Customer> s= new HashSet<>();
+        Customer c1 = Customer.builder().email("saransh").password("asdfgg").build();
+        Customer c2 = Customer.builder().email("saransh").password("asdfgg").build();
+        s.add(c1);
+        s.add(c2);
+        System.out.println(s.size());
+    }
 }
