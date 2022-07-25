@@ -22,6 +22,7 @@
 		<module>authorization-server</module>
 		<module>naming-server</module>
 		<module>api-gateway</module>
+		<module>packaging-and-delivery</module>
 	</modules>
 	<dependencies>
 
