@@ -64,7 +64,7 @@ public class JWTTokenProvider {
         JWTVerifier verifier = getJwtVerifier();
         try{return verifier.verify(token).getSubject();} catch (Exception e){
             log.error("error verifying token!");
-            throw new JWTVerificationException("Invalid Toekn");
+            throw new JWTVerificationException("Invalid Token");
         }
     }
 

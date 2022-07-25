@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 @NoArgsConstructor
 public class LoginHttpRequest {
     @Email(message = "Invalid email provided")
-    private String email;
+    private String username;
     @Min(value=6)
     private String password;
 }
