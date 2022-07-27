@@ -43,6 +43,7 @@ public class CustomerAuthController extends ExceptionHandling {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    //FOR TESTING API GATEWAY AND STUFF
     @GetMapping("/hello")
     public String hello(){
         return "hello World!";

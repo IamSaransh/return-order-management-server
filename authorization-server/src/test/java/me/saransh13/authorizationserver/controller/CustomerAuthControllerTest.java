@@ -29,6 +29,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 @ContextConfiguration(classes = {CustomerAuthController.class})
 @ExtendWith(SpringExtension.class)
 class CustomerAuthControllerTest {
@@ -116,13 +119,10 @@ class CustomerAuthControllerTest {
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(customerAuthController)
                 .build()
                 .perform(requestBuilder);
+        Date data = new Date();
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(400))
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.content()
-                        .string(
-                                "{\"date\":\"2022-07-25 18:46 pm UTC\",\"status\":400,\"httpStatus\":\"BAD_REQUEST\",\"reason\":\"BAD REQUEST\","
-                                        + "\"message\":\"AN ERROR OCCURRED\"}"));
-    }
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+   }
 
     /**
      * Method under test: {@link CustomerAuthController#hello()}
