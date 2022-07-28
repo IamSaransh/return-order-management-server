@@ -33,6 +33,7 @@ public class PackagingAndDeliveryController {
             @RequestParam @NotBlank  String componentType,
             @RequestParam   @Min(value = 1, message = "count should be 0 or more") Integer  count)
             throws InvalidComponentTypeException {
+        log.info("A REQUEST CAME");
         return packagingAndDeliveryService.getPackagingAndDeliveryCharge(componentType, count);
     }
 

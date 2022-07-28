@@ -23,6 +23,7 @@
 		<module>naming-server</module>
 		<module>api-gateway</module>
 		<module>packaging-and-delivery</module>
+		<module>component-processing-service</module>
 	</modules>
 	<dependencies>
 
