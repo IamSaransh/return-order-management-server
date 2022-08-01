@@ -43,7 +43,7 @@ public class AuthenticationFilter implements GatewayFilter {
                 .uri("lb://authorization-service/auth/v1/authenticate")
                 .header(HttpHeaders.AUTHORIZATION, authorizationHeader)
                 .retrieve()
-//                .onStatus(HttpStatus::isError, response -> Mono.error(new BadTokenException("Bad token")))
+                .onStatus(HttpStatus::isError, response -> Mono.error(new BadTokenException("Bad token on API GATEWAY")))
                 .bodyToMono(CustomerResponse.class)
                 .map(customerResponse -> {
                     exchange
