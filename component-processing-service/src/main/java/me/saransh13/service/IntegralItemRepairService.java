@@ -1,6 +1,7 @@
 package me.saransh13.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import me.saransh13.domain.Request;
 import me.saransh13.model.PackagingAndDeliveryResponse;
 import me.saransh13.model.ProcessingRequest;
@@ -21,6 +22,7 @@ import static me.saransh13.constants.Constants.DEFAULT_INTEGRAL_PROCESSING_CHARG
 
 @Service
 @Qualifier("integralItem-repair-service")
+@Slf4j
 public class IntegralItemRepairService extends ProcessDetailService {
 
     @Autowired
@@ -50,7 +52,13 @@ public class IntegralItemRepairService extends ProcessDetailService {
                 randomRequestId,
                 packagingAndDeliveryCharge)
         ;
-
+        log.info("returning response");
+        log.info(ProcessingResponse.builder()
+                .requestId(randomRequestId)
+                .processingCharge(DEFAULT_INTEGRAL_PROCESSING_CHARGE)
+                .packagingAndDeliveryCharge(packagingAndDeliveryCharge)
+                .dateOfDelivery(expectedDeliveredDate)
+                .build().toString());
 
         return ResponseEntity.ok(ProcessingResponse.builder()
                 .requestId(randomRequestId)

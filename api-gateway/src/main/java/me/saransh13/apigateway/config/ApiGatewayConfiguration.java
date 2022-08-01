@@ -27,27 +27,27 @@ public class ApiGatewayConfiguration {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder){
         return builder
                 .routes()
-//                .route(predicateSpec -> predicateSpec
-//                    .path("/auth/**")
-//                    .filters(gatewayFilterSpec -> gatewayFilterSpec
-//                    )
-//                    .uri("lb://authorization-service")  //http://localhost:8765/authorization-service/auth/v1/login
-//                )
                 .route(predicateSpec -> predicateSpec
-                        .path("/auth/**")
+                    .path("/auth/**")
+                    .filters(gatewayFilterSpec -> gatewayFilterSpec
+                    )
+                    .uri("lb://authorization-service")  //http://localhost:8765/authorization-service/auth/v1/login
+                )
+                .route(predicateSpec -> predicateSpec
+                        .path("/process/**")
                         .filters(gatewayFilterSpec -> gatewayFilterSpec
                                 .filter(authenticationFilter))
-                        .uri("lb://authorization-service")
+                        .uri("lb://component-processing-service")
                 )
 
 
                 .build();
     }
 
-    @Bean
-    public HttpClient httpClient() {
-        return HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);
-    }
+//    @Bean
+//    public HttpClient httpClient() {
+//        return HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);
+//    }
 
 
 
