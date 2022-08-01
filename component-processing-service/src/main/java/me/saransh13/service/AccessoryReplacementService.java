@@ -1,6 +1,5 @@
 package me.saransh13.service;
 
-
 import me.saransh13.domain.Request;
 import me.saransh13.model.PackagingAndDeliveryResponse;
 import me.saransh13.model.ProcessingRequest;
@@ -16,13 +15,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static me.saransh13.constants.Constants.DEFAULT_INTEGRAL_DELIVERY_DURATION;
-import static me.saransh13.constants.Constants.DEFAULT_INTEGRAL_PROCESSING_CHARGE;
+import static me.saransh13.constants.Constants.DEFAULT_ACCESSORY_DELIVERY_DURATION;
+import static me.saransh13.constants.Constants.DEFAULT_ACCESSORY_PROCESSING_CHARGE;
 
 @Service
-@Qualifier("integralItem-repair-service")
-public class IntegralItemRepairService extends ProcessDetailService {
-
+@Qualifier("accessory-replacement-service")
+public class AccessoryReplacementService extends ProcessDetailService {
     @Autowired
     PackagingAndDeliveryServiceProxy proxy;
     @Autowired
@@ -33,12 +31,13 @@ public class IntegralItemRepairService extends ProcessDetailService {
         //my request mapper auto validated the incoming data so no need to do the null checks as such
         String componentType = request.getComponentType().toString();
         int componentQuantity = request.getQuantity();
+        //TODO: to throw an invalidComponentException here
         PackagingAndDeliveryResponse chargeResponse = proxy.getPackagingAndDeliveryCharge(
                 componentType,
                 componentQuantity);
         //map the incoming record to my response class
         LocalDate expectedDeliveredDate = LocalDate.from(LocalDateTime.now()
-                .plusDays(DEFAULT_INTEGRAL_DELIVERY_DURATION));
+                .plusDays(DEFAULT_ACCESSORY_DELIVERY_DURATION));
         long randomRequestId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         int packagingAndDeliveryCharge = chargeResponse.getDeliveryCharge() + chargeResponse.getPackagingCharge();
 
@@ -54,7 +53,7 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
         return ResponseEntity.ok(ProcessingResponse.builder()
                 .requestId(randomRequestId)
-                .processingCharge(DEFAULT_INTEGRAL_PROCESSING_CHARGE)
+                .processingCharge(DEFAULT_ACCESSORY_PROCESSING_CHARGE)
                 .packagingAndDeliveryCharge(packagingAndDeliveryCharge)
                 .dateOfDelivery(expectedDeliveredDate)
                 .build());
@@ -67,10 +66,10 @@ public class IntegralItemRepairService extends ProcessDetailService {
                 .requestId(randomRequestId)
                 .username(request.getUsername())
                 .userContactNumber(request.getUserContactNumber())
-                .componentType(request.getComponentType().toString())
+                .componentName(componentType)
                 .componentName(request.getComponentName())
                 .quantity(componentQuantity)
-                .processingCharge(DEFAULT_INTEGRAL_PROCESSING_CHARGE)
+                .processingCharge(DEFAULT_ACCESSORY_PROCESSING_CHARGE)
                 .packagingAndDeliveryCharge(packagingAndDeliveryCharge)
                 .dateOfDelivery(expectedDeliveredDate)
                 .cardNumber(null)
@@ -80,4 +79,5 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
         repository.saveAndFlush(requestDomainEntity);
     }
+
 }

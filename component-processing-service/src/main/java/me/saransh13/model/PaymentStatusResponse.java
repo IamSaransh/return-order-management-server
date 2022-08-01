@@ -1,12 +1,13 @@
 package me.saransh13.model;
 
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PaymentSuccessResponse{
+@AllArgsConstructor
+public class PaymentStatusResponse {
     private String status;
 }
