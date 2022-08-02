@@ -138,24 +138,6 @@ class CustomerAuthControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string("hello World!"));
     }
 
-    /**
-     * Method under test: {@link CustomerAuthController#isAuthenticated()}
-     */
-    @Test
-    void testIsAuthenticated() throws Exception {
-        when(customerService.authenticateCustomer()).thenReturn(
-                new AuthenticateResponse(true, HttpStatus.CONTINUE, "Not all who wander are lost", "jane.doe@example.org"));
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/auth/v1/authenticate");
-        MockMvcBuilders.standaloneSetup(customerAuthController)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.content()
-                        .string(
-                                "{\"httpStatus\":\"CONTINUE\",\"message\":\"Not all who wander are lost\",\"email\":\"jane.doe@example.org\","
-                                        + "\"authenticated\":true}"));
-    }
 
     /**
      * Method under test: {@link CustomerAuthController#login(LoginHttpRequest)}

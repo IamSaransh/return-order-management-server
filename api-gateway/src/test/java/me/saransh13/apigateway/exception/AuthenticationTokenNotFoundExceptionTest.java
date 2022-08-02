@@ -18,5 +18,18 @@ class AuthenticationTokenNotFoundExceptionTest {
         assertEquals("Msg", actualAuthenticationTokenNotFoundException.getMessage());
         assertEquals("Msg", actualAuthenticationTokenNotFoundException.getLocalizedMessage());
     }
+
+    /**
+     * Method under test: {@link AuthenticationTokenNotFoundException#AuthenticationTokenNotFoundException(String)}
+     */
+    @Test
+    void testConstructor2() {
+        AuthenticationTokenNotFoundException actualAuthenticationTokenNotFoundException = new AuthenticationTokenNotFoundException(
+                "Msg");
+        assertNull(actualAuthenticationTokenNotFoundException.getCause());
+        assertEquals(0, actualAuthenticationTokenNotFoundException.getSuppressed().length);
+        assertEquals("Msg", actualAuthenticationTokenNotFoundException.getMessage());
+        assertEquals("Msg", actualAuthenticationTokenNotFoundException.getLocalizedMessage());
+    }
 }
 

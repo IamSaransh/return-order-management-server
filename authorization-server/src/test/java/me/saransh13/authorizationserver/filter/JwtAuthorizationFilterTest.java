@@ -79,29 +79,7 @@ class JwtAuthorizationFilterTest {
         assertEquals(-1L, mockHttpServletRequest.getContentLengthLong());
     }
 
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal2() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "javax.servlet.http.HttpServletRequest.getMethod()" because "request" is null
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:36)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(null, response, filterChain);
-    }
 
     /**
      * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
@@ -170,72 +148,7 @@ class JwtAuthorizationFilterTest {
         verify(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
     }
 
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal6() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "org.apache.coyote.Response.isCommitted()" because the return value of "org.apache.catalina.connector.Response.getCoyoteResponse()" is null
-        //       at org.apache.catalina.connector.Response.isCommitted(Response.java:619)
-        //       at org.apache.catalina.connector.Response.setStatus(Response.java:1507)
-        //       at org.apache.catalina.connector.Response.setStatus(Response.java:1489)
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:37)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        when(jWTTokenProvider.getAuthentication((String) any(), (HttpServletRequest) any()))
-                .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
-        when(jWTTokenProvider.isTokenValid((String) any(), (String) any())).thenReturn(true);
-        when(jWTTokenProvider.getSubject((String) any())).thenReturn("Hello from the Dreaming Spires");
-        DefaultMultipartHttpServletRequest defaultMultipartHttpServletRequest = mock(
-                DefaultMultipartHttpServletRequest.class);
-        when(defaultMultipartHttpServletRequest.getHeader((String) any())).thenReturn("Bearer ");
-        when(defaultMultipartHttpServletRequest.getMethod()).thenReturn("OPTIONS");
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(defaultMultipartHttpServletRequest, response, filterChain);
-    }
-
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal7() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "String.equalsIgnoreCase(String)" because the return value of "javax.servlet.http.HttpServletRequest.getMethod()" is null
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:36)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        when(jWTTokenProvider.getAuthentication((String) any(), (HttpServletRequest) any()))
-                .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
-        when(jWTTokenProvider.isTokenValid((String) any(), (String) any())).thenReturn(true);
-        when(jWTTokenProvider.getSubject((String) any())).thenReturn("Hello from the Dreaming Spires");
-        DefaultMultipartHttpServletRequest defaultMultipartHttpServletRequest = mock(
-                DefaultMultipartHttpServletRequest.class);
-        when(defaultMultipartHttpServletRequest.getHeader((String) any())).thenReturn("Bearer ");
-        when(defaultMultipartHttpServletRequest.getMethod()).thenReturn(null);
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(defaultMultipartHttpServletRequest, response, filterChain);
-    }
 
     /**
      * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
@@ -293,29 +206,7 @@ class JwtAuthorizationFilterTest {
         assertEquals(-1L, mockHttpServletRequest.getContentLengthLong());
     }
 
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal10() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "javax.servlet.http.HttpServletRequest.getMethod()" because "request" is null
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:36)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(null, response, filterChain);
-    }
 
     /**
      * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
@@ -384,72 +275,6 @@ class JwtAuthorizationFilterTest {
         verify(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
     }
 
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal14() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "org.apache.coyote.Response.isCommitted()" because the return value of "org.apache.catalina.connector.Response.getCoyoteResponse()" is null
-        //       at org.apache.catalina.connector.Response.isCommitted(Response.java:619)
-        //       at org.apache.catalina.connector.Response.setStatus(Response.java:1507)
-        //       at org.apache.catalina.connector.Response.setStatus(Response.java:1489)
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:37)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        when(jWTTokenProvider.getAuthentication((String) any(), (HttpServletRequest) any()))
-                .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
-        when(jWTTokenProvider.isTokenValid((String) any(), (String) any())).thenReturn(true);
-        when(jWTTokenProvider.getSubject((String) any())).thenReturn("Hello from the Dreaming Spires");
-        DefaultMultipartHttpServletRequest defaultMultipartHttpServletRequest = mock(
-                DefaultMultipartHttpServletRequest.class);
-        when(defaultMultipartHttpServletRequest.getHeader((String) any())).thenReturn("Bearer ");
-        when(defaultMultipartHttpServletRequest.getMethod()).thenReturn("OPTIONS");
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(defaultMultipartHttpServletRequest, response, filterChain);
-    }
-
-    /**
-     * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testDoFilterInternal15() throws IOException, ServletException {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "String.equalsIgnoreCase(String)" because the return value of "javax.servlet.http.HttpServletRequest.getMethod()" is null
-        //       at me.saransh13.authorizationserver.filter.JwtAuthorizationFilter.doFilterInternal(JwtAuthorizationFilter.java:36)
-        //   In order to prevent doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        when(jWTTokenProvider.getAuthentication((String) any(), (HttpServletRequest) any()))
-                .thenReturn(new TestingAuthenticationToken("Principal", "Credentials"));
-        when(jWTTokenProvider.isTokenValid((String) any(), (String) any())).thenReturn(true);
-        when(jWTTokenProvider.getSubject((String) any())).thenReturn("Hello from the Dreaming Spires");
-        DefaultMultipartHttpServletRequest defaultMultipartHttpServletRequest = mock(
-                DefaultMultipartHttpServletRequest.class);
-        when(defaultMultipartHttpServletRequest.getHeader((String) any())).thenReturn("Bearer ");
-        when(defaultMultipartHttpServletRequest.getMethod()).thenReturn(null);
-        Response response = new Response();
-        FilterChain filterChain = mock(FilterChain.class);
-        doNothing().when(filterChain).doFilter((ServletRequest) any(), (ServletResponse) any());
-        jwtAuthorizationFilter.doFilterInternal(defaultMultipartHttpServletRequest, response, filterChain);
-    }
 
     /**
      * Method under test: {@link JwtAuthorizationFilter#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
