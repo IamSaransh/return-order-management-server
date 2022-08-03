@@ -26,7 +26,6 @@ import static me.saransh13.authorizationserver.constant.SecurityConstant.JWT_TOK
  * @author saransh
  */
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("auth/v1")
 @Slf4j
 public class CustomerAuthController extends ExceptionHandling {

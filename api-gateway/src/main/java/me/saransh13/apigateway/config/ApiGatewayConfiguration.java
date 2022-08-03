@@ -29,8 +29,8 @@ public class ApiGatewayConfiguration {
                 .routes()
                 .route(predicateSpec -> predicateSpec
                     .path("/auth/**")
-                    .filters(gatewayFilterSpec -> gatewayFilterSpec
-                    )
+//                    .filters(gatewayFilterSpec -> gatewayFilterSpec
+//                    )
                     .uri("lb://authorization-service")  //http://localhost:8765/authorization-service/auth/v1/login
                 )
                 .route(predicateSpec -> predicateSpec

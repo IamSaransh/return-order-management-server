@@ -14,6 +14,13 @@ public class SecurityConstant {
     public static final String ME_SARANSH13 = "Saransh13.me";
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
 //    public static final String[] PUBLIC_URLS = {"/login", "/authenticate", "/signup"};
-    public static final String[] PUBLIC_URLS = {"**", "/h2-console/**"};
+    public static final String[] PUBLIC_URLS = {
+            "/auth/v1/login",
+            "/auth/v1/signup",
+            "/actuator/**",
+            "/swagger-ui/**",
+            "/configuration/**",
+            "/h2-console/**"
+    };
 
 }

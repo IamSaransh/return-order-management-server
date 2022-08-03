@@ -10,10 +10,7 @@ import me.saransh13.service.AccessoryReplacementService;
 import me.saransh13.service.IntegralItemRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static me.saransh13.constants.Constants.INVALID_COMPONENT_MESSAGE;
 
@@ -32,7 +29,11 @@ public class ComponentProcessingController {
         this.accessoryReplacementService = accessoryReplacementService;
     }
 
-    @GetMapping("/processDetail")
+    /*
+    *
+    * GET mapping with a body is not  supported in angularJs
+     */
+    @PostMapping("/processDetail")
     public ResponseEntity<ProcessingResponse> getProcessDetail(@RequestBody ProcessingRequest request) throws InvalidComponentTypeException {
         ComponentType componentType = request.getComponentType();
         log.info("Received request for a component of type {}",componentType.toString());
