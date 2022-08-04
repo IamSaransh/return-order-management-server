@@ -1,23 +1,6 @@
 package me.saransh13.authorizationserver.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.anyBoolean;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.auth0.jwt.exceptions.JWTVerificationException;
-
-import javax.servlet.http.HttpServletRequest;
-
-import me.saransh13.authorizationserver.domain.Customer;
-import me.saransh13.authorizationserver.domain.UserPrincipal;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +11,11 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = {JWTTokenProvider.class})
 @ExtendWith(SpringExtension.class)

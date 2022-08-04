@@ -1,8 +1,5 @@
 package me.saransh13.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.saransh13.exception.PaymentFailedException;
 import me.saransh13.model.CompleteProcessingRequest;
@@ -20,6 +17,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
+
 @ContextConfiguration(classes = {CompleteProcessingController.class})
 @ExtendWith(SpringExtension.class)
 class CompleteProcessingControllerTest {
@@ -29,9 +29,7 @@ class CompleteProcessingControllerTest {
     @MockBean
     private CompleteProcessingService completeProcessingService;
 
-    /**
-     * Method under test: {@link CompleteProcessingController#completeProcessing(CompleteProcessingRequest)}
-     */
+
     @Test
     void testCompleteProcessing() throws Exception, PaymentFailedException {
         when(completeProcessingService.paymentResponse((CompleteProcessingRequest) any()))

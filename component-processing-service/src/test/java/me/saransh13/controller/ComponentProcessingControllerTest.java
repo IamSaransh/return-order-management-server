@@ -1,8 +1,5 @@
 package me.saransh13.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.saransh13.model.ComponentType;
 import me.saransh13.model.ProcessingRequest;
@@ -23,6 +20,9 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {ComponentProcessingController.class})
 @ExtendWith(SpringExtension.class)

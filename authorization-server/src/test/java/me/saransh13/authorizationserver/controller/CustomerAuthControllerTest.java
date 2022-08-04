@@ -1,13 +1,9 @@
 package me.saransh13.authorizationserver.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.saransh13.authorizationserver.domain.Customer;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
 import me.saransh13.authorizationserver.exception.EmailExistException;
-import me.saransh13.authorizationserver.model.AuthenticateResponse;
 import me.saransh13.authorizationserver.model.LoginHttpRequest;
 import me.saransh13.authorizationserver.model.SignupHttpRequest;
 import me.saransh13.authorizationserver.service.CustomerService;
@@ -16,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
@@ -29,8 +24,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {CustomerAuthController.class})
 @ExtendWith(SpringExtension.class)

@@ -1,6 +1,5 @@
 package me.saransh13.apigateway.filter;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.saransh13.apigateway.exception.AuthenticationTokenNotFoundException;
 import me.saransh13.apigateway.exception.BadTokenException;

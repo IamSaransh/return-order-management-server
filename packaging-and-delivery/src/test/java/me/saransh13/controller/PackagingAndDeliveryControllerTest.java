@@ -1,9 +1,5 @@
 package me.saransh13.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.when;
-
 import me.saransh13.exception.InvalidComponentTypeException;
 import me.saransh13.service.PackagingAndDeliveryService;
 import org.junit.jupiter.api.Test;
@@ -19,6 +15,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = {PackagingAndDeliveryController.class})
 @ExtendWith(SpringExtension.class)

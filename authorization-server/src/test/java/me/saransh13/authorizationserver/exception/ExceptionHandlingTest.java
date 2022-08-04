@@ -1,27 +1,23 @@
 package me.saransh13.authorizationserver.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.auth0.jwt.exceptions.TokenExpiredException;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.HashSet;
-import javax.persistence.NoResultException;
-
 import me.saransh13.authorizationserver.model.HttpErrorResponse;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+
+import javax.persistence.NoResultException;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.HashSet;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class ExceptionHandlingTest {
     /**
@@ -127,26 +123,7 @@ class ExceptionHandlingTest {
         assertEquals("UNAUTHORIZED", body.getReason());
     }
 
-    /**
-     * Method under test: {@link ExceptionHandling#tokenExpiredException(TokenExpiredException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testTokenExpiredException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "com.auth0.jwt.exceptions.TokenExpiredException.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.tokenExpiredException(ExceptionHandling.java:72)
-        //   In order to prevent tokenExpiredException(TokenExpiredException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   tokenExpiredException(TokenExpiredException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        (new ExceptionHandling()).tokenExpiredException(null);
-    }
 
     /**
      * Method under test: {@link ExceptionHandling#emailExistException(EmailExistException)}
@@ -166,26 +143,7 @@ class ExceptionHandlingTest {
         assertEquals("BAD REQUEST", body.getReason());
     }
 
-    /**
-     * Method under test: {@link ExceptionHandling#emailExistException(EmailExistException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testEmailExistException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "me.saransh13.authorizationserver.exception.EmailExistException.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.emailExistException(ExceptionHandling.java:77)
-        //   In order to prevent emailExistException(EmailExistException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   emailExistException(EmailExistException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        (new ExceptionHandling()).emailExistException(null);
-    }
 
     /**
      * Method under test: {@link ExceptionHandling#userNotFoundException(UserNotFoundException)}
@@ -205,98 +163,9 @@ class ExceptionHandlingTest {
         assertEquals("BAD REQUEST", body.getReason());
     }
 
-    /**
-     * Method under test: {@link ExceptionHandling#userNotFoundException(UserNotFoundException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testUserNotFoundException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "me.saransh13.authorizationserver.exception.UserNotFoundException.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.userNotFoundException(ExceptionHandling.java:83)
-        //   In order to prevent userNotFoundException(UserNotFoundException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   userNotFoundException(UserNotFoundException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        (new ExceptionHandling()).userNotFoundException(null);
-    }
 
-    /**
-     * Method under test: {@link ExceptionHandling#methodNotSupportedException(HttpRequestMethodNotSupportedException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testMethodNotSupportedException() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException
-        //       at java.util.Objects.requireNonNull(Objects.java:208)
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.methodNotSupportedException(ExceptionHandling.java:88)
-        //   In order to prevent methodNotSupportedException(HttpRequestMethodNotSupportedException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   methodNotSupportedException(HttpRequestMethodNotSupportedException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        ExceptionHandling exceptionHandling = new ExceptionHandling();
-        exceptionHandling
-                .methodNotSupportedException(new HttpRequestMethodNotSupportedException("https://example.org/example"));
-    }
-
-    /**
-     * Method under test: {@link ExceptionHandling#methodNotSupportedException(HttpRequestMethodNotSupportedException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testMethodNotSupportedException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "org.springframework.web.HttpRequestMethodNotSupportedException.getSupportedHttpMethods()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.methodNotSupportedException(ExceptionHandling.java:88)
-        //   In order to prevent methodNotSupportedException(HttpRequestMethodNotSupportedException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   methodNotSupportedException(HttpRequestMethodNotSupportedException).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        (new ExceptionHandling()).methodNotSupportedException(null);
-    }
-
-    /**
-     * Method under test: {@link ExceptionHandling#methodNotSupportedException(HttpRequestMethodNotSupportedException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testMethodNotSupportedException3() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.util.NoSuchElementException
-        //       at java.util.HashMap$HashIterator.nextNode(HashMap.java:1599)
-        //       at java.util.HashMap$KeyIterator.next(HashMap.java:1620)
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.methodNotSupportedException(ExceptionHandling.java:88)
-        //   In order to prevent methodNotSupportedException(HttpRequestMethodNotSupportedException)
-        //   from throwing NoSuchElementException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   methodNotSupportedException(HttpRequestMethodNotSupportedException).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        ExceptionHandling exceptionHandling = new ExceptionHandling();
-        HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException = mock(
-                HttpRequestMethodNotSupportedException.class);
-        when(httpRequestMethodNotSupportedException.getSupportedHttpMethods()).thenReturn(new HashSet<>());
-        exceptionHandling.methodNotSupportedException(httpRequestMethodNotSupportedException);
-    }
 
     /**
      * Method under test: {@link ExceptionHandling#methodNotSupportedException(HttpRequestMethodNotSupportedException)}
@@ -342,27 +211,6 @@ class ExceptionHandlingTest {
     }
 
     /**
-     * Method under test: {@link ExceptionHandling#internalServerErrorException(Exception)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testInternalServerErrorException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "java.lang.Exception.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.internalServerErrorException(ExceptionHandling.java:94)
-        //   In order to prevent internalServerErrorException(Exception)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   internalServerErrorException(Exception).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        (new ExceptionHandling()).internalServerErrorException(null);
-    }
-
-    /**
      * Method under test: {@link ExceptionHandling#notFoundException(NoResultException)}
      */
     @Test
@@ -380,49 +228,9 @@ class ExceptionHandlingTest {
         assertEquals("NOT FOUND", body.getReason());
     }
 
-    /**
-     * Method under test: {@link ExceptionHandling#notFoundException(NoResultException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testNotFoundException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "String.toUpperCase()" because "message" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.createHttpResponse(ExceptionHandling.java:114)
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.notFoundException(ExceptionHandling.java:101)
-        //   In order to prevent notFoundException(NoResultException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   notFoundException(NoResultException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        ExceptionHandling exceptionHandling = new ExceptionHandling();
-        exceptionHandling.notFoundException(new NoResultException());
-    }
 
-    /**
-     * Method under test: {@link ExceptionHandling#notFoundException(NoResultException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testNotFoundException3() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "javax.persistence.NoResultException.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.notFoundException(ExceptionHandling.java:100)
-        //   In order to prevent notFoundException(NoResultException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   notFoundException(NoResultException).
-        //   See https://diff.blue/R013 to resolve this issue.
 
-        (new ExceptionHandling()).notFoundException(null);
-    }
 
     /**
      * Method under test: {@link ExceptionHandling#iOException(IOException)}
@@ -440,27 +248,6 @@ class ExceptionHandlingTest {
         assertEquals(500, body.getStatus());
         assertEquals("ERROR OCCURRED WHILE PROCESSING FILE", body.getMessage());
         assertEquals("INTERNAL SERVER ERROR", body.getReason());
-    }
-
-    /**
-     * Method under test: {@link ExceptionHandling#iOException(IOException)}
-     */
-    @Test
-    @Disabled("TODO: Complete this test")
-    void testIOException2() {
-        // TODO: Complete this test.
-        //   Reason: R013 No inputs found that don't throw a trivial exception.
-        //   Diffblue Cover tried to run the arrange/act section, but the method under
-        //   test threw
-        //   java.lang.NullPointerException: Cannot invoke "java.io.IOException.getMessage()" because "exception" is null
-        //       at me.saransh13.authorizationserver.exception.ExceptionHandling.iOException(ExceptionHandling.java:106)
-        //   In order to prevent iOException(IOException)
-        //   from throwing NullPointerException, add constructors or factory
-        //   methods that make it easier to construct fully initialized objects used in
-        //   iOException(IOException).
-        //   See https://diff.blue/R013 to resolve this issue.
-
-        (new ExceptionHandling()).iOException(null);
     }
 
     /**

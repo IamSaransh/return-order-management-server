@@ -47,7 +47,6 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
         //SaveDetails in the database for the further processing
         persistRequestInDatabase(request,
-                componentType,
                 componentQuantity,
                 expectedDeliveredDate,
                 randomRequestId,
@@ -71,7 +70,7 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
     }
 
-    private void persistRequestInDatabase(ProcessingRequest request, String componentType, int componentQuantity, LocalDate expectedDeliveredDate, long randomRequestId, int packagingAndDeliveryCharge) {
+    private void persistRequestInDatabase(ProcessingRequest request, int componentQuantity, LocalDate expectedDeliveredDate, long randomRequestId, int packagingAndDeliveryCharge) {
         Request requestDomainEntity = Request.builder()
                 .requestId(randomRequestId)
                 .username(request.getUsername())

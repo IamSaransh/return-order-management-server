@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static me.saransh13.authorizationserver.constant.SecurityConstant.*;
+import static me.saransh13.authorizationserver.constant.SecurityConstant.OPTIONS_HTTP_METHOD;
+import static me.saransh13.authorizationserver.constant.SecurityConstant.TOKEN_HEADER_PREFIX;
 
 /**
  * @author saransh
