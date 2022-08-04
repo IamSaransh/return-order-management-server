@@ -106,7 +106,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.1</version>
 				<configuration>
+						<image>
+							<name>iamsaransh/rom-${project.artifactId}:${project.version}</name>
+						</image>
+						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
