@@ -3,7 +3,7 @@ package me.saransh13.constants;
 
 
 public class Constants {
-    private Constants(){
+    public Constants(){
         throw new IllegalStateException("Utility class");
     }
     public static final int DEFAULT_INTEGRAL_PROCESSING_CHARGE = 500;
