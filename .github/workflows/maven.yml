@@ -1,0 +1,28 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Push To SonaCloud Maven
+
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: cd api-gateway; mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=iamsaransh -Dsonar.projectKey=return-order-api-gateway -Dsonar.login=88f8071678c87f1ceb6553bd014e6728b5c82d5e
+
