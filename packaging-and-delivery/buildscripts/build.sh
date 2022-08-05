@@ -2,7 +2,7 @@
 echo "navigating to your directory"
 cd "${BASH_SOURCE%/*}" || exit
 cd ..
-export SONAR_TOKEN=e7ec22ea3b36e4a85a1847069debc5bc6cf1beb2
+export SONAR_TOKEN=72be5950a78aac5e6964fcd5b2383c9db87bf426
 echo "sonar token is : $SONAR_TOKEN"
 
 echo 'Running jacoco:prepare-agent...'
@@ -13,5 +13,4 @@ echo 'Running sonar:sonar...'
 mvn sonar:sonar \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.organization=iamsaransh \
-  -Dsonar.projectKey=return-order-authorization-service
-
+  -Dsonar.projectKey=packaging-and-return-order-delivery
