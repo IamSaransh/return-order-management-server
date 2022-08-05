@@ -1,13 +1,9 @@
 package me.saransh13.authorizationserver.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.saransh13.authorizationserver.domain.Customer;
 import me.saransh13.authorizationserver.domain.UserPrincipal;
 import me.saransh13.authorizationserver.exception.EmailExistException;
-import me.saransh13.authorizationserver.model.AuthenticateResponse;
 import me.saransh13.authorizationserver.model.LoginHttpRequest;
 import me.saransh13.authorizationserver.model.SignupHttpRequest;
 import me.saransh13.authorizationserver.service.CustomerService;
@@ -16,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
@@ -29,8 +24,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {CustomerAuthController.class})
 @ExtendWith(SpringExtension.class)
@@ -138,24 +135,6 @@ class CustomerAuthControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string("hello World!"));
     }
 
-    /**
-     * Method under test: {@link CustomerAuthController#isAuthenticated()}
-     */
-    @Test
-    void testIsAuthenticated() throws Exception {
-        when(customerService.authenticateCustomer()).thenReturn(
-                new AuthenticateResponse(true, HttpStatus.CONTINUE, "Not all who wander are lost", "jane.doe@example.org"));
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/auth/v1/authenticate");
-        MockMvcBuilders.standaloneSetup(customerAuthController)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.content()
-                        .string(
-                                "{\"httpStatus\":\"CONTINUE\",\"message\":\"Not all who wander are lost\",\"email\":\"jane.doe@example.org\","
-                                        + "\"authenticated\":true}"));
-    }
 
     /**
      * Method under test: {@link CustomerAuthController#login(LoginHttpRequest)}

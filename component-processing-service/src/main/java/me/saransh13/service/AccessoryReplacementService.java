@@ -27,6 +27,7 @@ public class AccessoryReplacementService extends ProcessDetailService {
     private RequestRepository repository;
 
 
+    @Override
     public ResponseEntity<ProcessingResponse> getProcessDetail(ProcessingRequest request) {
         //my request mapper auto validated the incoming data so no need to do the null checks as such
         String componentType = request.getComponentType().toString();

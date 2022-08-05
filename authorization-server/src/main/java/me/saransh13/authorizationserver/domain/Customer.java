@@ -1,13 +1,12 @@
 package me.saransh13.authorizationserver.domain;
 
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
-
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
-
 import java.io.Serializable;
 /**
  * @author saransh

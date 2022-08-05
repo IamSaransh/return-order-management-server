@@ -1,6 +1,7 @@
 package me.saransh13.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import me.saransh13.domain.Request;
 import me.saransh13.model.PackagingAndDeliveryResponse;
 import me.saransh13.model.ProcessingRequest;
@@ -21,6 +22,7 @@ import static me.saransh13.constants.Constants.DEFAULT_INTEGRAL_PROCESSING_CHARG
 
 @Service
 @Qualifier("integralItem-repair-service")
+@Slf4j
 public class IntegralItemRepairService extends ProcessDetailService {
 
     @Autowired
@@ -29,6 +31,7 @@ public class IntegralItemRepairService extends ProcessDetailService {
     private RequestRepository repository;
 
 
+    @Override
     public ResponseEntity<ProcessingResponse> getProcessDetail(ProcessingRequest request) {
         //my request mapper auto validated the incoming data so no need to do the null checks as such
         String componentType = request.getComponentType().toString();
@@ -44,13 +47,18 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
         //SaveDetails in the database for the further processing
         persistRequestInDatabase(request,
-                componentType,
                 componentQuantity,
                 expectedDeliveredDate,
                 randomRequestId,
                 packagingAndDeliveryCharge)
         ;
-
+        log.info("returning response");
+        log.info(ProcessingResponse.builder()
+                .requestId(randomRequestId)
+                .processingCharge(DEFAULT_INTEGRAL_PROCESSING_CHARGE)
+                .packagingAndDeliveryCharge(packagingAndDeliveryCharge)
+                .dateOfDelivery(expectedDeliveredDate)
+                .build().toString());
 
         return ResponseEntity.ok(ProcessingResponse.builder()
                 .requestId(randomRequestId)
@@ -62,7 +70,7 @@ public class IntegralItemRepairService extends ProcessDetailService {
 
     }
 
-    private void persistRequestInDatabase(ProcessingRequest request, String componentType, int componentQuantity, LocalDate expectedDeliveredDate, long randomRequestId, int packagingAndDeliveryCharge) {
+    private void persistRequestInDatabase(ProcessingRequest request, int componentQuantity, LocalDate expectedDeliveredDate, long randomRequestId, int packagingAndDeliveryCharge) {
         Request requestDomainEntity = Request.builder()
                 .requestId(randomRequestId)
                 .username(request.getUsername())

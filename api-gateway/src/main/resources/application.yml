@@ -22,14 +22,22 @@ spring:
         discovery:
             enabled: true
         gateway:
+            httpclient:
+                wiretap: true
+                httpserver:
+                    wiretap: true
             globalcors:
               cors-configurations:
                 '[/**]':
-                    allowedOriginPatterns: "*"
+                    allowedOrigins:
+                      - '*'
                     allowedHeaders: "*"
+                    exposedHeaders:
+                      - '*'
                     allowedMethods:
                       - GET
                       - POST
+                      - OPTIONS
             discovery:
                 locator:
                     enabled: true
@@ -40,3 +48,16 @@ spring:
         boot:
             logging:
                 LogLevel: debug
+
+
+
+logging:
+    level:
+        reactor:
+            netty: INFO
+        org:
+            springframework:
+                cloud:
+                    gateway: INFO
+
+
