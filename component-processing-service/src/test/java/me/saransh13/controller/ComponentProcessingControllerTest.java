@@ -1,5 +1,8 @@
 package me.saransh13.controller;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.saransh13.model.ComponentType;
 import me.saransh13.model.ProcessingRequest;
@@ -20,9 +23,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {ComponentProcessingController.class})
 @ExtendWith(SpringExtension.class)
@@ -51,7 +51,7 @@ class ComponentProcessingControllerTest {
         processingRequest.setUserContactNumber("42");
         processingRequest.setUsername("janedoe");
         String content = (new ObjectMapper()).writeValueAsString(processingRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/process/v1/processDetail")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/process/v1/processDetail")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(componentProcessingController)
@@ -75,7 +75,7 @@ class ComponentProcessingControllerTest {
         processingRequest.setUserContactNumber("42");
         processingRequest.setUsername("janedoe");
         String content = (new ObjectMapper()).writeValueAsString(processingRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/process/v1/processDetail")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/process/v1/processDetail")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(componentProcessingController)
@@ -105,7 +105,7 @@ class ComponentProcessingControllerTest {
         processingRequest.setUserContactNumber("42");
         processingRequest.setUsername("janedoe");
         String content = (new ObjectMapper()).writeValueAsString(processingRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/process/v1/processDetail")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/process/v1/processDetail")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(componentProcessingController)
