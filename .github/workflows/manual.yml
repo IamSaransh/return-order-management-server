@@ -1,0 +1,33 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main", "develop" ]
+  schedule:
+    - cron: '39 19 * * 5'
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-20.04
+    env:
+      SONAR_TOKEN_GATEWAY: ${{secrets.SONAR_TOKEN_GATEWAY}}
+      SONAR_TOKEN_AUTH: ${{secrets.SONAR_TOKEN_AUTH}}
+      SONAR_TOKEN_COMPONENT_PROCESSING: ${{secrets.SONAR_TOKEN_COMPONENT_PROCESSING}}
+      SONAR_TOKEN_PACKAGING_AND_DELIVERY: ${{secrets.SONAR_TOKEN_PACKAGING_AND_DELIVERY}}
+    
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run script file
+      run: |
+         chmod +x ./sonarbuild.sh
+         ./sonarbuild.sh $SONAR_TOKEN_GATEWAY $SONAR_TOKEN_AUTH $SONAR_TOKEN_COMPONENT_PROCESSING $SONAR_TOKEN_PACKAGING_AND_DELIVERY 
+      shell: bash
+      

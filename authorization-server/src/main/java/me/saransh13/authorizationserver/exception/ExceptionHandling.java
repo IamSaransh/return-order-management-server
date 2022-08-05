@@ -77,10 +77,6 @@ public class ExceptionHandling implements ErrorController {
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }
 
-    @ExceptionHandler(EmailNotFoundException.class)
-    public ResponseEntity<HttpErrorResponse> emailNotFoundException(EmailNotFoundException exception) {
-        return createHttpResponse(BAD_REQUEST, exception.getMessage());
-    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<HttpErrorResponse> userNotFoundException(UserNotFoundException exception) {

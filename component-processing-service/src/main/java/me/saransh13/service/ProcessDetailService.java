@@ -7,7 +7,5 @@ import org.springframework.http.ResponseEntity;
 
 public abstract class ProcessDetailService {
 
-    public ResponseEntity<ProcessingResponse> getProcessDetail(ProcessingRequest request) {
-        return null;
-    }
+    abstract ResponseEntity<ProcessingResponse> getProcessDetail(ProcessingRequest request) ;
 }
