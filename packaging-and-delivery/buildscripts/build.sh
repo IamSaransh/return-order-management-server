@@ -2,7 +2,7 @@
 echo "navigating to your directory"
 cd "${BASH_SOURCE%/*}" || exit
 cd ..
-export SONAR_TOKEN=72be5950a78aac5e6964fcd5b2383c9db87bf426
+export SONAR_TOKEN=$SONAR_TOKEN_PACKAGING_AND_DELIVERY
 echo "sonar token is : $SONAR_TOKEN"
 
 echo 'Running jacoco:prepare-agent...'

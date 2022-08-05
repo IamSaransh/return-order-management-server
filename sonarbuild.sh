@@ -1,8 +1,11 @@
+
+
 #!/bin/bash
 echo "Script executed from: ${PWD}"
 cd "${BASH_SOURCE%/*}" || exit
 export BASE_PATH=`pwd`;
 echo "exported BASE_PATH as $BASE_PATH"
+
 
 #modlule 1
 cd "api-gateway/buildscripts" || exit
@@ -30,6 +33,5 @@ cd "component-processing-service/buildscripts" || exit
 echo "Script executed from: ${PWD}"
 chmod +x build.sh
 ./build.sh
-
 
 exit
