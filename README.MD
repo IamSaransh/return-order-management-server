@@ -1,4 +1,5 @@
 ## This is a multi-module project for return order management.
+[![Manual workflow](https://github.com/IamSaransh/return-order-management-server/actions/workflows/manual.yml/badge.svg?branch=main)](https://github.com/IamSaransh/return-order-management-server/actions/workflows/manual.yml)
 
 - Each module has its own `Database`(if required), its own `configurations`, `Docker file`, `Deployable Scripts` and its own `Pom`
 - Each module can be deployed independently irrespective of the other services.
