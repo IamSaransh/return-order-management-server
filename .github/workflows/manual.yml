@@ -23,6 +23,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run script file
       run: |
-         chmod +x sonarbuild.sh
-         sonarbuild.sh
+         chmod +x ./sonarbuild.sh
+         ./sonarbuild.sh
       shell: bash
