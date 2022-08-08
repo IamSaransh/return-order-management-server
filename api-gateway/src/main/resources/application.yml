@@ -1,24 +1,20 @@
-
+eureka:
+    client:
+        fetch-registry: true
+        register-with-eureka: true
+        service-url:
+            defaultZone: http://naming-server:8761/eureka
+    instance:
+        preferIpAddress: true
 management:
     endpoints:
         web:
             exposure:
                 include: '*'
-logging:
-    level:
-        reactor:
-            netty: INFO
-        org:
-            springframework:
-                cloud:
-                    gateway: INFO
 
 server:
     port: 8765
 spring:
-    config:
-        activate:
-            on-profile: devmvn tes
     application:
         name: api-gateway
     cloud:
@@ -30,56 +26,37 @@ spring:
                 httpserver:
                     wiretap: true
             globalcors:
-              cors-configurations:
-                '[/**]':
-                    allowedOrigins:
-                      - '*'
-                    allowedHeaders:
-                      - "*"
-                    exposedHeaders:
-                      - '*'
-                    allowedMethods:
-                      - GET
-                      - POST
-                      - OPTIONS
+                cors-configurations:
+                    '[/**]':
+                        allowedOrigins:
+                            - '*'
+                        allowedHeaders:
+                            - '*'
+                        exposedHeaders:
+                            - '*'
+                        allowedMethods:
+                            - GET
+                            - POST
+                            - OPTIONS
             discovery:
                 locator:
                     enabled: true
                     lower-case-service-id: true
             metrics:
                 enabled: true
+    springframework:
+        boot:
+            logging:
+                LogLevel: debug
 
 
 
-
-
-eureka:
-    client:
-        register-with-eureka: true
-        fetch-registry: true
-        service-url:
-            defaultZone: http://localhost:8761/eureka
----
-
-spring:
-    config:
-        activate:
-            on-profile: aws
-
-eureka:
-    client:
-        register-with-eureka: true
-        fetch-registry: true
-        service-url:
-            defaultZone: http://naming-server:8761/eureka
-    instance:
-        prefer-ip-address: true
-
----
-
-spring:
-    profiles:
-        active: ${PROFILE:dev}
-
-
+logging:
+    level:
+        reactor:
+            netty: INFO
+        org:
+            springframework:
+                cloud:
+                    gateway: INFO
 

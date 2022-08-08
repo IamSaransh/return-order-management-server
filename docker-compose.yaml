@@ -3,17 +3,18 @@ version: "2.1"
 services:
   naming-server:
     image: iamsaransh/rom-naimg-server:0.0.1-SNAPSHOT
+#    mem_limit: 512m
     ports:
       - 8761:8761
   authorization-server:
     image: iamsaransh/rom-authorization-server:0.0.1-SNAPSHOT
+#    mem_limit: 512m
     environment:
       PROFILE: dev
     ports:
       - 8000:8000
     depends_on:
      - naming-server
-#
   packaging-and-delivery:
     image: iamsaransh/rom-packaging-and-delivery:0.0.1-SNAPSHOT
     ports:
@@ -28,8 +29,9 @@ services:
       - naming-server
   api-gateway:
     image: iamsaransh/rom-api-gateway:0.0.1-SNAPSHOT
+#    mem_limit: 512m
     ports:
       - 8765:8765
     depends_on:
       - naming-server
-    restart: on-failure
+#    restart: on-failure
