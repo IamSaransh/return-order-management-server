@@ -4,9 +4,15 @@ management:
         web:
             exposure:
                 include: '*'
-    metrics:
-      export:
-        influx:
+logging:
+    level:
+        reactor:
+            netty: INFO
+        org:
+            springframework:
+                cloud:
+                    gateway: INFO
+
 server:
     port: 8765
 spring:
@@ -38,21 +44,8 @@ spring:
                     lower-case-service-id: true
             metrics:
                 enabled: true
-    springframework:
-        boot:
-            logging:
-                LogLevel: debug
 
 
-
-logging:
-    level:
-        reactor:
-            netty: INFO
-        org:
-            springframework:
-                cloud:
-                    gateway: INFO
 
     config:
         activate:
