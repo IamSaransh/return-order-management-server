@@ -1,0 +1,47 @@
+
+packaging-and-delivery:
+    delivery-item:
+        accessory: 100
+        integral-item: 200
+    packaging-item:
+        accessory: 50
+        integral-item: 100
+        protective-sheath: 50
+server:
+    port: 8080
+spring:
+    application:
+        name: packaging-and-delivery-service
+
+    config:
+        activate:
+            on-profile: dev
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+
+---
+
+spring:
+    config:
+        activate:
+            on-profile: aws
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://naming-server:8761/eureka
+    instance:
+        prefer-ip-address: true
+
+---
+
+spring:
+    profiles:
+        active: ${PROFILE:dev}
