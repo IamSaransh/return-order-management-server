@@ -14,22 +14,22 @@ services:
     depends_on:
      - naming-server
 #
-#  packaging-and-delivery:
-#    image: iamsaransh/rom-packaging-and-delivery:0.0.1-SNAPSHOT
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - naming-server
-#  component-processing-service:
-#    image: iamsaransh/rom-component-processing-service:0.0.1-SNAPSHOT
-#    ports:
-#      - 8095:8095
-#    depends_on:
-#      - naming-server
-#  api-gateway:
-#    image: iamsaransh/rom-api-gateway:0.0.1-SNAPSHOT
-#    ports:
-#      - 8765:8765
-#    depends_on:
-#      - naming-server
-#    restart: on-failure
+  packaging-and-delivery:
+    image: iamsaransh/rom-packaging-and-delivery:0.0.1-SNAPSHOT
+    ports:
+      - 8080:8080
+    depends_on:
+      - naming-server
+  component-processing-service:
+    image: iamsaransh/rom-component-processing-service:0.0.1-SNAPSHOT
+    ports:
+      - 8095:8095
+    depends_on:
+      - naming-server
+  api-gateway:
+    image: iamsaransh/rom-api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 8765:8765
+    depends_on:
+      - naming-server
+    restart: on-failure
